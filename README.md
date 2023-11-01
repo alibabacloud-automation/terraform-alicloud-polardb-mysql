@@ -33,10 +33,12 @@ module "example" {
   renewal_status                = "Normal"
   tde_status                    = "Disabled"
   encrypt_new_tables            = "OFF"
-  parameters                    = {
-    name = "wait_timeout"
-    value = "86"
-  }
+  parameters = [
+    {
+      name  = "wait_timeout"
+      value = "86"
+    }
+  ]
   #alicloud_polardb_database
   create_database               = true
   db_name                       = "tf-dbname"
@@ -59,6 +61,16 @@ module "example" {
   create_account_privilege      = true
   #alicloud_polardb_backup_policy
   create_backup_policy          = true
+  preferred_backup_period                     = ["Tuesday", "Saturday"]
+  preferred_backup_time                       = "02:00Z-03:00Z"
+  data_level1_backup_retention_period         = "7"
+  data_level2_backup_retention_period         = "60"
+  backup_retention_policy_on_cluster_deletion = "LATEST"
+  backup_frequency                            = "Normal"
+  data_level1_backup_frequency                = "Normal"
+  data_level1_backup_time                     = "02:00Z-03:00Z"
+  data_level1_backup_period                   = ["Tuesday", "Saturday"]
+  data_level2_backup_period                   = ["Tuesday", "Saturday"]
 }
 ```
 
