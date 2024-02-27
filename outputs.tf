@@ -103,3 +103,8 @@ output "backup_policy_data_level2_backup_period" {
   description = "PolarDB Cluster of level-2 backup period. Valid values: Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday. NOTE: Note Select at least two values. Separate multiple values with commas (,)."
   value       = concat(alicloud_polardb_backup_policy.backup_policy.*.data_level2_backup_period, [""])[0]
 }
+
+output "backup_policy_log_backup_retention_period" {
+  description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
+  value       = concat(alicloud_polardb_backup_policy.backup_policy.*.log_backup_retention_period, [""])[0]
+}

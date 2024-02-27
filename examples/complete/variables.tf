@@ -236,3 +236,9 @@ variable "deletion_lock"{
   type = number
   default = null
 }
+
+variable "log_backup_retention_period"{
+  description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
+  type        = string
+  default     = "8"
+}

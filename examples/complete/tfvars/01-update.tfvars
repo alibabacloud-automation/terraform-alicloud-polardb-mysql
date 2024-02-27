@@ -49,3 +49,4 @@ data_level1_backup_frequency                = "Normal"
 data_level1_backup_time                     = "02:00Z-03:00Z"
 data_level1_backup_period                   = ["Tuesday", "Saturday"]
 data_level2_backup_period                   = ["Tuesday", "Saturday"]
+log_backup_retention_period                 = "8"
