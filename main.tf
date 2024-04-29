@@ -28,7 +28,34 @@ resource "alicloud_polardb_cluster" "cluster" {
       value = lookup(parameters.value, "value", null)
     }
   }
-  tags = var.tags
+  tags                                        = var.tags
+  vpc_id                                      = var.vpc_id
+  encryption_key                              = var.encryption_key
+  role_arn                                    = var.role_arn
+  imci_switch                                 = var.imci_switch
+  sub_category                                = var.sub_category
+  creation_category                           = var.creation_category
+  storage_type                                = var.storage_type
+  storage_pay_type                            = var.storage_pay_type
+  storage_space                               = var.storage_space
+  hot_standby_cluster                         = var.hot_standby_cluster
+  creation_option                             = var.creation_option
+  source_resource_id                          = var.source_resource_id
+  gdn_id                                      = var.gdn_id
+  clone_data_point                            = var.clone_data_point
+  serverless_type                             = var.serverless_type
+  serverless_steady_switch                    = var.serverless_steady_switch
+  scale_min                                   = var.scale_min
+  scale_max                                   = var.scale_max
+  scale_ro_num_min                            = var.scale_ro_num_min
+  scale_ro_num_max                            = var.scale_ro_num_max
+  allow_shut_down                             = var.allow_shut_down
+  seconds_until_auto_pause                    = var.seconds_until_auto_pause
+  scale_ap_ro_num_min                         = var.scale_ap_ro_num_min
+  scale_ap_ro_num_max                         = var.scale_ap_ro_num_max
+  proxy_type                                  = var.proxy_type
+  proxy_class                                 = var.proxy_class
+  backup_retention_policy_on_cluster_deletion = var.cluster_backup_retention_policy_on_cluster_deletion
 }
 
 resource "alicloud_polardb_database" "database" {
@@ -80,17 +107,21 @@ resource "alicloud_polardb_account_privilege" "account_privilege" {
 }
 
 resource "alicloud_polardb_backup_policy" "backup_policy" {
-  count                                       = var.create_backup_policy ? 1 : 0
-  db_cluster_id                               = local.this_db_cluster_id
-  preferred_backup_period                     = var.preferred_backup_period
-  preferred_backup_time                       = var.preferred_backup_time
-  data_level1_backup_retention_period         = var.data_level1_backup_retention_period
-  data_level2_backup_retention_period         = var.data_level2_backup_retention_period
-  backup_retention_policy_on_cluster_deletion = var.backup_retention_policy_on_cluster_deletion
-  backup_frequency                            = var.backup_frequency
-  data_level1_backup_frequency                = var.data_level1_backup_frequency
-  data_level1_backup_time                     = var.data_level1_backup_time
-  data_level1_backup_period                   = var.data_level1_backup_period
-  data_level2_backup_period                   = var.data_level2_backup_period
-  log_backup_retention_period                 = var.log_backup_retention_period
+  count                                              = var.create_backup_policy ? 1 : 0
+  db_cluster_id                                      = local.this_db_cluster_id
+  preferred_backup_period                            = var.preferred_backup_period
+  preferred_backup_time                              = var.preferred_backup_time
+  data_level1_backup_retention_period                = var.data_level1_backup_retention_period
+  data_level2_backup_retention_period                = var.data_level2_backup_retention_period
+  backup_retention_policy_on_cluster_deletion        = var.backup_retention_policy_on_cluster_deletion
+  backup_frequency                                   = var.backup_frequency
+  data_level1_backup_frequency                       = var.data_level1_backup_frequency
+  data_level1_backup_time                            = var.data_level1_backup_time
+  data_level1_backup_period                          = var.data_level1_backup_period
+  data_level2_backup_period                          = var.data_level2_backup_period
+  log_backup_retention_period                        = var.log_backup_retention_period
+  data_level2_backup_another_region_region           = var.data_level2_backup_another_region_region
+  data_level2_backup_another_region_retention_period = var.data_level2_backup_another_region_retention_period
+  log_backup_another_region_region                   = var.log_backup_another_region_region
+  log_backup_another_region_retention_period         = var.log_backup_another_region_retention_period
 }

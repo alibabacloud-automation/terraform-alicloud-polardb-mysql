@@ -22,61 +22,79 @@ These types of resources are supported:
 
 ```hcl
 module "example" {
-  source                        = "terraform-alicloud-modules/polardb-mysql/alicloud"
+  source = "terraform-alicloud-modules/polardb-mysql/alicloud"
   #alicloud_polardb_cluster
-  create_cluster                = true
-  db_version                    = "8.0" 
-  pay_type                      = "PostPaid"
-  db_node_class                 = "polar.mysql.x4.medium"
-  polardb_cluster_description   = "tf-test"
-  modify_type                   = "Upgrade"
-  renewal_status                = "Normal"
-  tde_status                    = "Disabled"
+  create_cluster              = true
+  db_version                  = "8.0"
+  pay_type                    = "PostPaid"
+  db_node_class               = "polar.mysql.x4.medium"
+  polardb_cluster_description = "tf-test"
+  modify_type                 = "Upgrade"
+  renewal_status              = "Normal"
+  tde_status                  = "Disabled"
   parameters = [
     {
       name  = "wait_timeout"
       value = "86"
     }
   ]
+  deletion_lock                                       = 0
+  imci_switch                                         = "OFF"
+  sub_category                                        = "Exclusive"
+  creation_category                                   = "Normal"
+  hot_standby_cluster                                 = "ON"
+  creation_option                                     = "Normal"
+  cluster_backup_retention_policy_on_cluster_deletion = "LATEST"
   #alicloud_polardb_database
-  create_database               = true
-  db_name                       = "tf-dbname"
+  create_database = true
+  db_name         = "tf-dbname"
   #alicloud_polardb_account
-  create_account                = true
-  account_name                  = "tf_test123" 
-  account_password              = "tf_test123"
-  account_type                  = "Normal"
+  create_account   = true
+  account_name     = "tf_test123"
+  account_password = "tf_test123"
+  account_type     = "Normal"
   #alicloud_polardb_endpoint
-  create_endpoint               = true
-  endpoint_type                 = "Custom"
-  read_write_mode               = "ReadOnly"
-  auto_add_new_nodes            = "Enable"
-  net_type                      = "Public"
+  create_endpoint    = true
+  endpoint_type      = "Custom"
+  read_write_mode    = "ReadOnly"
+  auto_add_new_nodes = "Enable"
+  net_type           = "Private"
   #alicloud_polardb_endpoint_address
-  create_endpoint_address       = true
-  connection_prefix             = "testpolardbconn"
-  account_privilege             = "ReadOnly"
+  create_endpoint_address = true
+  connection_prefix       = "testpolardbconn"
+  account_privilege       = "ReadOnly"
   #alicloud_polardb_account_privilege
-  create_account_privilege      = true
+  create_account_privilege = true
   #alicloud_polardb_backup_policy
-  create_backup_policy          = true
-  preferred_backup_period                     = ["Tuesday", "Saturday"]
-  preferred_backup_time                       = "02:00Z-03:00Z"
-  data_level1_backup_retention_period         = "7"
-  data_level2_backup_retention_period         = "60"
-  backup_retention_policy_on_cluster_deletion = "LATEST"
-  backup_frequency                            = "Normal"
-  data_level1_backup_frequency                = "Normal"
-  data_level1_backup_time                     = "02:00Z-03:00Z"
-  data_level1_backup_period                   = ["Tuesday", "Saturday"]
-  data_level2_backup_period                   = ["Tuesday", "Saturday"]
-  log_backup_retention_period                 = "7"
+  create_backup_policy                               = true
+  preferred_backup_period                            = ["Tuesday", "Saturday"]
+  preferred_backup_time                              = "02:00Z-03:00Z"
+  data_level1_backup_retention_period                = "7"
+  data_level2_backup_retention_period                = "60"
+  backup_retention_policy_on_cluster_deletion        = "LATEST"
+  backup_frequency                                   = "Normal"
+  data_level1_backup_frequency                       = "Normal"
+  data_level1_backup_time                            = "02:00Z-03:00Z"
+  data_level1_backup_period                          = ["Tuesday", "Saturday"]
+  data_level2_backup_period                          = ["Tuesday", "Saturday"]
+  log_backup_retention_period                        = "7"
+  data_level2_backup_another_region_region           = "cn-hangzhou"
+  data_level2_backup_another_region_retention_period = "30"
+  log_backup_another_region_region                   = "cn-hangzhou"
+  log_backup_another_region_retention_period         = "30"
 }
 ```
 
 ## Examples
 
 * [complete example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/complete)
+* [clone-from-polardb example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/clone-from-polardb)
+* [clone-from-rds example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/clone-from-rds)
+* [migration-from-rds example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/migration-from-rds)
+* [multimaster-polardb example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/multimaster-polardb)
+* [se-normal-polardb example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/se-normal-polardb)
+* [serverless-polardb example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/serverless-polardb)
+* [steady-serverless-polardb example](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/steady-serverless-polardb)
 
 ## Notes
 

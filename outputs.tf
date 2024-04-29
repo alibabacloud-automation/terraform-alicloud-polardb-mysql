@@ -34,6 +34,16 @@ output "endpoint_ssl_connection_string" {
   value       = concat(alicloud_polardb_endpoint.endpoint.*.ssl_connection_string, [""])[0]
 }
 
+output "creation_category" {
+  description = "The edition of the PolarDB service."
+  value       = concat(alicloud_polardb_cluster.cluster.*.creation_category, [""])[0]
+}
+
+output "serverless_type" {
+  description = "The edition of the PolarDB service."
+  value       = concat(alicloud_polardb_cluster.cluster.*.serverless_type, [""])[0]
+}
+
 output "endpoint_address_id" {
   description = "The id of the polardb endpoint address."
   value       = concat(alicloud_polardb_endpoint_address.endpoint_address.*.id, [""])[0]
@@ -61,7 +71,7 @@ output "account_privilege_id" {
 
 output "backup_policy_retention_period" {
   description = "Cluster backup retention days, Fixed for 7 days, not modified."
-  value       = concat(alicloud_polardb_backup_policy.backup_policy.*.backup_retention_period, [""])[0]
+  value       = concat(alicloud_polardb_backup_policy.backup_policy.*.data_level1_backup_retention_period, [""])[0]
 }
 
 output "backup_policy_data_level1_backup_retention_period" {
@@ -107,4 +117,9 @@ output "backup_policy_data_level2_backup_period" {
 output "backup_policy_log_backup_retention_period" {
   description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
   value       = concat(alicloud_polardb_backup_policy.backup_policy.*.log_backup_retention_period, [""])[0]
+}
+
+output "backup_policy_enable_backup_log" {
+  description = "Indicates whether the log backup feature was enabled. Valid values are `0`, `1`. `1` By default, the log backup feature is enabled and cannot be disabled."
+  value       = concat(alicloud_polardb_backup_policy.backup_policy.*.enable_backup_log, [""])[0]
 }

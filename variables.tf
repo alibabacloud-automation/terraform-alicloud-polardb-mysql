@@ -125,6 +125,174 @@ variable "security_group_ids" {
   default     = null
 }
 
+variable "deletion_lock" {
+  description = "Valid values are 0, 1. 1 means to open the cluster protection lock, 0 means to close the cluster protection lock. Cannot modify after created when pay_type is Prepaid."
+  type        = number
+  default     = null
+}
+
+variable "vpc_id" {
+  description = "The id of the VPC."
+  type        = string
+  default     = null
+}
+
+variable "encryption_key" {
+  description = "The ID of the custom key. `encryption_key` cannot be modified after TDE is opened."
+  type        = string
+  default     = null
+}
+
+variable "role_arn" {
+  description = "The Alibaba Cloud Resource Name (ARN) of the RAM role. A RAM role is a virtual identity that you can create within your Alibaba Cloud account."
+  type        = string
+  default     = null
+}
+
+variable "imci_switch" {
+  description = "Specifies whether to enable the In-Memory Column Index (IMCI) feature. Valid values are `ON`, `OFF`."
+  type        = string
+  default     = null
+}
+
+variable "sub_category" {
+  description = "The category of the cluster. Valid values are `Exclusive`, `General`. Only MySQL supports.If the specifications between exclusive and shared are mutually matched, sub_category is a required field."
+  type        = string
+  default     = null
+}
+
+variable "creation_category" {
+  description = "The edition of the PolarDB service. Valid values are `Normal`,`Basic`,`ArchiveNormal`,`NormalMultimaster`,`SENormal`."
+  type        = string
+  default     = null
+}
+
+variable "storage_type" {
+  description = "The storage type of the cluster. Enterprise storage type values are `PSL5`, `PSL4`. The standard version storage type values are `ESSDPL1`, `ESSDPL2`, `ESSDPL3`. The standard version only supports MySQL."
+  type        = string
+  default     = null
+}
+
+variable "storage_pay_type" {
+  description = "The billing method of the storage. Valid values `PostPaid`, `PrePaid`."
+  type        = string
+  default     = null
+}
+
+variable "storage_space" {
+  description = "Storage space charged by space (monthly package). Unit: GB. Valid values for PolarDB for MySQL Standard Edition: 20 to 32000. It is valid when pay_type are `PrePaid` ,`PostPaid`. Valid values for PolarDB for MySQL Enterprise Edition: 50 to 100000.It is valid when pay_type is `PrePaid`."
+  type        = number
+  default     = null
+}
+
+variable "hot_standby_cluster" {
+  description = "Whether to enable the hot standby cluster. Valid values are `ON`, `OFF`. Only MySQL supports."
+  type        = string
+  default     = null
+}
+
+variable "creation_option" {
+  description = "The method that is used to create a cluster. Valid values are `Normal`,`CloneFromPolarDB`,`CloneFromRDS`,`MigrationFromRDS`,`CreateGdnStandby`. The default value is Normal. If DBType is set to MySQL and DBVersion is set to 5.6 or 5.7, this parameter can be set to CloneFromRDS or MigrationFromRDS. If DBType is set to MySQL and DBVersion is set to 8.0, this parameter can be set to CreateGdnStandby."
+  type        = string
+  default     = null
+}
+
+variable "source_resource_id" {
+  description = "The ID of the source RDS instance or the ID of the source PolarDB cluster. This parameter is required only when CreationOption is set to MigrationFromRDS, CloneFromRDS, or CloneFromPolarDB."
+  type        = string
+  default     = null
+}
+
+variable "gdn_id" {
+  description = "The ID of the global database network (GDN). This parameter is required if CreationOption is set to CreateGdnStandby."
+  type        = string
+  default     = null
+}
+
+variable "clone_data_point" {
+  description = "The time point of data to be cloned. Valid values are `LATEST`,`BackupID`,`Timestamp`. If CreationOption is set to CloneFromRDS, the value of this parameter must be LATEST."
+  type        = string
+  default     = null
+}
+
+variable "serverless_type" {
+  description = "The type of the serverless cluster. Valid values `AgileServerless`, `SteadyServerless`. This parameter is valid only for serverless clusters."
+  type        = string
+  default     = null
+}
+
+variable "serverless_steady_switch" {
+  description = "Serverless steady-state switch. Valid values are `ON`, `OFF`. This parameter is valid only for serverless clusters.When serverless_steady_switch is `ON` and serverless_type is `SteadyServerless`, parameters `scale_min`, `scale_max`, `scale_ro_num_min` and `scale_ro_num_max` are all required."
+  type        = string
+  default     = null
+}
+
+variable "scale_min" {
+  description = "The minimum number of PCUs per node for scaling. Valid values: 1 PCU to 31 PCUs. It is valid when serverless_type is `AgileServerless`. Valid values: 1 PCU to 8 PCUs.It is valid when serverless_type is `SteadyServerless`.· This parameter is valid only for serverless clusters."
+  type        = number
+  default     = null
+}
+
+variable "scale_max" {
+  description = "The maximum number of PCUs per node for scaling. Valid values: 1 PCU to 32 PCUs. It is valid when serverless_type is `AgileServerless`. Valid values: 1 PCU to 8 PCUs.It is valid when serverless_type is `SteadyServerless`. This parameter is valid only for serverless clusters."
+  type        = number
+  default     = null
+}
+
+variable "scale_ro_num_min" {
+  description = "The minimum number of read-only nodes for scaling. Valid values: 0 to 15 . It is valid when serverless_type is `AgileServerless`. Valid values: 0 to 7 .It is valid when serverless_type is `SteadyServerless`. This parameter is valid only for serverless clusters."
+  type        = number
+  default     = null
+}
+
+variable "scale_ro_num_max" {
+  description = "The maximum number of read-only nodes for scaling. Valid values: 0 to 15. It is valid when serverless_type is `AgileServerless`. Valid values: 0 to 7. It is valid when serverless_type is `SteadyServerless`. This parameter is valid only for serverless clusters."
+  type        = number
+  default     = null
+}
+
+variable "allow_shut_down" {
+  description = "Specifies whether to enable the no-activity suspension feature. Default value: false. Valid values are `true`, `false`. This parameter is valid only for serverless clusters."
+  type        = string
+  default     = null
+}
+
+variable "seconds_until_auto_pause" {
+  description = "The detection period for No-activity Suspension. Valid values: 300 to 86,4005. Unit: seconds. The detection duration must be a multiple of 300 seconds. This parameter is valid only for serverless clusters."
+  type        = number
+  default     = null
+}
+
+variable "scale_ap_ro_num_min" {
+  description = "Number of Read-only Columnar Nodes. Valid values: 0 to 7. This parameter is valid only for serverless clusters. This parameter is required when there are column nodes that support steady-state serverless."
+  type        = number
+  default     = null
+}
+
+variable "scale_ap_ro_num_max" {
+  description = "Number of Read-only Columnar Nodes. Valid values: 0 to 7. This parameter is valid only for serverless clusters. This parameter is required when there are column nodes that support steady-state serverless."
+  type        = number
+  default     = null
+}
+
+variable "proxy_class" {
+  description = "The specifications of the Standard Edition PolarProxy. Available parameters can refer to the latest docs"
+  type        = string
+  default     = null
+}
+
+variable "proxy_type" {
+  description = "The type of PolarProxy. Default value: `OFF`. Valid values are `OFF`, `EXCLUSIVE` `GENERAL`."
+  type        = string
+  default     = null
+}
+
+variable "cluster_backup_retention_policy_on_cluster_deletion" {
+  description = "The retention policy for the backup sets when you delete the cluster.  Valid values are `ALL`, `LATEST`, `NONE`."
+  type        = string
+  default     = null
+}
+
 #alicloud_polardb_database
 variable "create_database" {
   description = "Controls if database should be created"
@@ -245,7 +413,7 @@ variable "ssl_enabled" {
 variable "net_type" {
   description = "The network type of the endpoint address.Valid values: Public, Private, Inner."
   type        = string
-  default     = "Public"
+  default     = "Private"
 }
 
 variable "ssl_auto_rotate" {
@@ -347,14 +515,32 @@ variable "data_level2_backup_period" {
   default     = null
 }
 
-variable "deletion_lock"{
-  description = "Valid values are 0, 1. 1 means to open the cluster protection lock, 0 means to close the cluster protection lock. Cannot modify after created when pay_type is Prepaid."
-  type = number
-  default = null
+variable "log_backup_retention_period" {
+  description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
+  type        = string
+  default     = null
 }
 
-variable "log_backup_retention_period"{
-  description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
+variable "data_level2_backup_another_region_region" {
+  description = "PolarDB Cluster of level-2 backup is a cross regional backup area."
+  type        = string
+  default     = null
+}
+
+variable "data_level2_backup_another_region_retention_period" {
+  description = "PolarDB Cluster of level-2 backup cross region backup retention period. Valid values are `0`, `30 to 7300`, `-1`."
+  type        = string
+  default     = null
+}
+
+variable "log_backup_another_region_region" {
+  description = "The region in which you want to store cross-region log backups."
+  type        = string
+  default     = null
+}
+
+variable "log_backup_another_region_retention_period" {
+  description = "The retention period of cross-region log backups. Default value: `0`. Valid values are `0`, `30 to 7300`, `-1`."
   type        = string
   default     = null
 }

@@ -83,6 +83,67 @@ variable "security_group_ids" {
   default     = null
 }
 
+variable "deletion_lock" {
+  description = "Valid values are 0, 1. 1 means to open the cluster protection lock, 0 means to close the cluster protection lock. Cannot modify after created when pay_type is Prepaid."
+  type        = number
+  default     = null
+}
+
+
+variable "vpc_id" {
+  description = "The id of the VPC."
+  type        = string
+  default     = null
+}
+
+variable "encryption_key" {
+  description = "The ID of the custom key. `encryption_key` cannot be modified after TDE is opened."
+  type        = string
+  default     = null
+}
+
+variable "role_arn" {
+  description = "The Alibaba Cloud Resource Name (ARN) of the RAM role. A RAM role is a virtual identity that you can create within your Alibaba Cloud account."
+  type        = string
+  default     = null
+}
+
+variable "imci_switch" {
+  description = "Specifies whether to enable the In-Memory Column Index (IMCI) feature. Valid values are `ON`, `OFF`."
+  type        = string
+  default     = null
+}
+
+variable "sub_category" {
+  description = "The category of the cluster. Valid values are `Exclusive`, `General`. Only MySQL supports.If the specifications between exclusive and shared are mutually matched, sub_category is a required field."
+  type        = string
+  default     = null
+}
+
+variable "creation_category" {
+  description = "The edition of the PolarDB service. Valid values are `Normal`,`Basic`,`ArchiveNormal`,`NormalMultimaster`,`SENormal`."
+  type        = string
+  default     = null
+}
+
+variable "hot_standby_cluster" {
+  description = "Whether to enable the hot standby cluster. Valid values are `ON`, `OFF`. Only MySQL supports."
+  type        = string
+  default     = null
+}
+
+variable "creation_option" {
+  description = "The method that is used to create a cluster. Valid values are `Normal`,`CloneFromPolarDB`,`CloneFromRDS`,`MigrationFromRDS`,`CreateGdnStandby`. The default value is Normal. If DBType is set to MySQL and DBVersion is set to 5.6 or 5.7, this parameter can be set to CloneFromRDS or MigrationFromRDS. If DBType is set to MySQL and DBVersion is set to 8.0, this parameter can be set to CreateGdnStandby."
+  type        = string
+  default     = null
+}
+
+variable "cluster_backup_retention_policy_on_cluster_deletion" {
+  description = "The retention policy for the backup sets when you delete the cluster.  Valid values are `ALL`, `LATEST`, `NONE`."
+  type        = string
+  default     = null
+}
+
 #alicloud_polardb_database
 variable "db_description" {
   description = "Database description."
@@ -148,7 +209,7 @@ variable "ssl_enabled" {
 variable "net_type" {
   description = "The network type of the endpoint address.Valid values: Public, Private, Inner."
   type        = string
-  default     = "Public"
+  default     = "Private"
 }
 variable "ssl_auto_rotate" {
   description = "Specifies whether automatic rotation of SSL certificates is enabled. Valid values: Enable,Disable."
@@ -231,14 +292,32 @@ variable "data_level2_backup_period" {
   default     = null
 }
 
-variable "deletion_lock"{
-  description = "Valid values are 0, 1. 1 means to open the cluster protection lock, 0 means to close the cluster protection lock. Cannot modify after created when pay_type is Prepaid."
-  type = number
-  default = null
-}
-
-variable "log_backup_retention_period"{
+variable "log_backup_retention_period" {
   description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
   type        = string
   default     = "8"
+}
+
+variable "data_level2_backup_another_region_region" {
+  description = "PolarDB Cluster of level-2 backup is a cross regional backup area."
+  type        = string
+  default     = null
+}
+
+variable "data_level2_backup_another_region_retention_period" {
+  description = "PolarDB Cluster of level-2 backup cross region backup retention period. Valid values are `0`, `30 to 7300`, `-1`."
+  type        = string
+  default     = null
+}
+
+variable "log_backup_another_region_region" {
+  description = "The region in which you want to store cross-region log backups."
+  type        = string
+  default     = null
+}
+
+variable "log_backup_another_region_retention_period" {
+  description = "The retention period of cross-region log backups. Default value: `0`. Valid values are `0`, `30 to 7300`, `-1`."
+  type        = string
+  default     = null
 }

@@ -9,6 +9,11 @@ output "cluster_connection_string" {
   value       = module.default.cluster_connection_string
 }
 
+output "creation_category" {
+  description = "The edition of the PolarDB service"
+  value       = module.default.creation_category
+}
+
 output "database_id" {
   description = "The current database resource ID."
   value       = module.default.database_id
@@ -61,7 +66,7 @@ output "account_privilege_id" {
 
 output "backup_policy_retention_period" {
   description = "Cluster backup retention days, Fixed for 7 days, not modified."
-  value       = module.default.backup_policy_retention_period
+  value       = module.default.backup_policy_data_level1_backup_retention_period
 }
 
 output "backup_policy_data_level1_backup_retention_period" {
@@ -107,4 +112,9 @@ output "backup_policy_data_level2_backup_period" {
 output "backup_policy_log_backup_retention_period" {
   description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
   value       = module.default.backup_policy_log_backup_retention_period
+}
+
+output "backup_policy_enable_backup_log" {
+  description = "Indicates whether the log backup feature was enabled. Valid values are `0`, `1`. `1` By default, the log backup feature is enabled and cannot be disabled."
+  value       = module.default.backup_policy_enable_backup_log
 }

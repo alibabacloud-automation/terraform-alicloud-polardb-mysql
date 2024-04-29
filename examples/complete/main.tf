@@ -1,3 +1,12 @@
+provider "alicloud" {
+  region = "cn-shanghai"
+}
+
+resource "random_integer" "default" {
+  min = 10000
+  max = 99999
+}
+
 data "alicloud_polardb_node_classes" "default" {
   db_type    = "MySQL"
   db_version = "8.0"
@@ -21,7 +30,6 @@ module "default" {
   #alicloud_polardb_cluster
   create_cluster              = true
   db_version                  = "8.0"
-  pay_type                    = "PostPaid"
   vswitch_id                  = alicloud_vswitch.default.id
   db_node_class               = var.db_node_class
   polardb_cluster_description = var.polardb_cluster_description
@@ -46,6 +54,16 @@ module "default" {
   tags = {
     Created = "TF"
   }
+  vpc_id                                              = var.vpc_id
+  encryption_key                                      = var.encryption_key
+  role_arn                                            = var.role_arn
+  imci_switch                                         = var.imci_switch
+  sub_category                                        = var.sub_category
+  creation_category                                   = var.creation_category
+  hot_standby_cluster                                 = var.hot_standby_cluster
+  creation_option                                     = var.creation_option
+  cluster_backup_retention_policy_on_cluster_deletion = var.cluster_backup_retention_policy_on_cluster_deletion
+
   #alicloud_polardb_database
   db_name               = "tf-dbname"
   create_database       = true
@@ -71,21 +89,25 @@ module "default" {
   ssl_auto_rotate    = var.ssl_auto_rotate
   #alicloud_polardb_endpoint_address
   create_endpoint_address = true
-  connection_prefix       = var.connection_prefix
+  connection_prefix       = "${var.connection_prefix}-${random_integer.default.result}"
   #alicloud_polardb_account_privilege
   create_account_privilege = true
   account_privilege        = "ReadOnly"
   #alicloud_polardb_backup_policy
-  create_backup_policy                        = true
-  preferred_backup_period                     = var.preferred_backup_period
-  preferred_backup_time                       = var.preferred_backup_time
-  data_level1_backup_retention_period         = var.data_level1_backup_retention_period
-  data_level2_backup_retention_period         = var.data_level2_backup_retention_period
-  backup_retention_policy_on_cluster_deletion = var.backup_retention_policy_on_cluster_deletion
-  backup_frequency                            = var.backup_frequency
-  data_level1_backup_frequency                = var.data_level1_backup_frequency
-  data_level1_backup_time                     = var.data_level1_backup_time
-  data_level1_backup_period                   = var.data_level1_backup_period
-  data_level2_backup_period                   = var.data_level2_backup_period
-  log_backup_retention_period                 = var.log_backup_retention_period
+  create_backup_policy                               = true
+  preferred_backup_period                            = var.preferred_backup_period
+  preferred_backup_time                              = var.preferred_backup_time
+  data_level1_backup_retention_period                = var.data_level1_backup_retention_period
+  data_level2_backup_retention_period                = var.data_level2_backup_retention_period
+  backup_retention_policy_on_cluster_deletion        = var.backup_retention_policy_on_cluster_deletion
+  backup_frequency                                   = var.backup_frequency
+  data_level1_backup_frequency                       = var.data_level1_backup_frequency
+  data_level1_backup_time                            = var.data_level1_backup_time
+  data_level1_backup_period                          = var.data_level1_backup_period
+  data_level2_backup_period                          = var.data_level2_backup_period
+  log_backup_retention_period                        = var.log_backup_retention_period
+  data_level2_backup_another_region_region           = var.data_level2_backup_another_region_region
+  data_level2_backup_another_region_retention_period = var.data_level2_backup_another_region_retention_period
+  log_backup_another_region_region                   = var.log_backup_another_region_region
+  log_backup_another_region_retention_period         = var.log_backup_another_region_retention_period
 }
