@@ -82,6 +82,62 @@ variable "security_group_ids" {
   type        = set(string)
   default     = null
 }
+variable "target_db_revision_version_code" {
+  description = "The Version Code of the target version, whose parameter values can be obtained from the [DescribeDBClusterVersion] interface."
+  type        = string
+  default     = null
+}
+variable "db_node_id" {
+  description = "The ID of the node or node subscript. Node subscript values: 1 to 15."
+  type        = string
+  default     = null
+}
+variable "hot_replica_mode" {
+  description = "Indicates whether the hot standby feature is enabled. Valid values are `ON`, `OFF`. Only MySQL supports."
+  type        = string
+  default     = null
+}
+variable "default_time_zone" {
+  description = "The time zone of the cluster. You can set the parameter to a value that is on the hour from -12:00 to +13:00 based on UTC. Example: 00:00. Default value: SYSTEM. This value indicates that the time zone of the cluster is the same as the time zone of the region."
+  type        = string
+  default     = "SYSTEM"
+}
+variable "lower_case_table_names" {
+  description = "Specifies whether the table names are case-sensitive. Default value: `1`.  Valid values are `1`, `0`."
+  type        = number
+  default     = 1
+}
+variable "db_node_num" {
+  description = "The number of Standard Edition nodes. Default value: `1`. Valid values are `1`, `2`."
+  type        = number
+  default     = 1
+}
+variable "loose_polar_log_bin" {
+  description = "Enable the Binlog function. Default value: `OFF`. Valid values are `OFF`, `ON`."
+  type        = string
+  default     = "OFF"
+}
+
+variable "planned_end_time" {
+  description = "The latest time to start executing the target scheduled task. The format is YYYY-MM-DDThh: mm: ssZ (UTC)."
+  type        = string
+  default     = ""
+}
+variable "planned_start_time" {
+  description = "The earliest time to start executing a scheduled (i.e. within the target time period) kernel version upgrade task. The format is YYYY-MM-DDThh: mm: ssZ (UTC)."
+  type        = string
+  default     = ""
+}
+variable "from_time_service" {
+  description = "Immediate or scheduled kernel version upgrade. Valid values are `true`, `false`. True means immediate execution, False means scheduled execution."
+  type        = string
+  default     = "false"
+}
+variable "upgrade_type" {
+  description = "Version upgrade type. Valid values are PROXY, DB, ALL. PROXY means upgrading the proxy version, DB means upgrading the db version, ALL means upgrading both db and proxy versions simultaneously."
+  type        = string
+  default     = "ALL"
+}
 
 #alicloud_polardb_database
 variable "db_description" {
@@ -148,12 +204,17 @@ variable "ssl_enabled" {
 variable "net_type" {
   description = "The network type of the endpoint address.Valid values: Public, Private, Inner."
   type        = string
-  default     = "Public"
+  default     = "Private"
 }
 variable "ssl_auto_rotate" {
   description = "Specifies whether automatic rotation of SSL certificates is enabled. Valid values: Enable,Disable."
   type        = string
   default     = "Disable"
+}
+variable "endpoint_connection_prefix" {
+  description = "The Prefix of the specified endpoint."
+  type        = string
+  default     = "testprivateprefix"
 }
 
 #alicloud_polardb_endpoint_address
@@ -231,13 +292,13 @@ variable "data_level2_backup_period" {
   default     = null
 }
 
-variable "deletion_lock"{
+variable "deletion_lock" {
   description = "Valid values are 0, 1. 1 means to open the cluster protection lock, 0 means to close the cluster protection lock. Cannot modify after created when pay_type is Prepaid."
-  type = number
-  default = null
+  type        = number
+  default     = null
 }
 
-variable "log_backup_retention_period"{
+variable "log_backup_retention_period" {
   description = "The retention period of the log backups. Valid values are `3 to 7300`, `-1`."
   type        = string
   default     = "8"
