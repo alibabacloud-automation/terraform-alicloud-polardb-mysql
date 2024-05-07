@@ -96,7 +96,7 @@ variable "collector_status" {
 }
 
 variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. "
+  description = "Set of parameters needs to be set after DB cluster was launched. name: The name of a parameter. value: The value of a parameter."
   type        = list(map(string))
   default     = []
 }
@@ -422,6 +422,18 @@ variable "ssl_auto_rotate" {
   default     = "Disable"
 }
 
+variable "db_endpoint_description" {
+  description = "The name of the custom cluster endpoint."
+  type        = string
+  default     = ""
+}
+
+variable "endpoint_port" {
+  description = "Port of the specified private endpoint. Valid values: 3000 to 5999."
+  type        = string
+  default     = null
+}
+
 #alicloud_polardb_endpoint_address
 variable "create_endpoint_address" {
   description = "Controls if endpoint address should be created"
@@ -433,6 +445,12 @@ variable "connection_prefix" {
   description = "The Prefix of the specified endpoint."
   type        = string
   default     = ""
+}
+
+variable "endpoint_address_port" {
+  description = "Port of the specified public endpoint. Valid values: 3000 to 5999."
+  type        = string
+  default     = null
 }
 
 #alicloud_polardb_account_privilege
@@ -541,6 +559,99 @@ variable "log_backup_another_region_region" {
 
 variable "log_backup_another_region_retention_period" {
   description = "The retention period of cross-region log backups. Default value: `0`. Valid values are `0`, `30 to 7300`, `-1`."
+  type        = string
+  default     = null
+}
+
+#alicloud_polardb_global_database_network
+variable "create_global_database_network" {
+  description = "Controls if global database network should be created"
+  type        = bool
+  default     = false
+}
+
+variable "global_database_network_description" {
+  description = "The description of the Global Database Network."
+  type        = string
+  default     = null
+}
+
+#alicloud_polardb_parameter_group
+variable "create_parameter_group" {
+  description = "Controls if parameter_group should be created"
+  type        = bool
+  default     = false
+}
+
+variable "parameter_group_name" {
+  description = "The name of the parameter template. It must be 8 to 64 characters in length, and can contain letters, digits, and underscores (_). It must start with a letter and cannot contain Chinese characters."
+  type        = string
+  default     = "parameter_name"
+}
+
+variable "db_type" {
+  description = "The type of the database engine. Only `MySQL` is supported."
+  type        = string
+  default     = "MySQL"
+}
+
+variable "parameter_group_db_version" {
+  description = "he version number of the database engine. Valid values: `5.6`, `5.7`, `8.0`."
+  type        = string
+  default     = "8.0"
+}
+
+variable "parameter_group_parameters" {
+  description = "The parameter template. param_name: The name of a parameter in the parameter template. param_value: The value of a parameter in the parameter template."
+  type        = list(map(string))
+  default     = []
+}
+
+variable "parameter_group_description" {
+  description = "The description of the parameter template. It must be 0 to 200 characters in length."
+  type        = string
+  default     = null
+}
+
+#alicloud_polardb_primary_endpoint
+variable "create_primary_endpoint" {
+  description = "Controls if primary endpoint should be created"
+  type        = bool
+  default     = false
+}
+
+variable "primary_endpoint_ssl_enabled" {
+  description = "Specifies how to modify the SSL encryption status. Valid values: `Disable`, `Enable`, `Update`."
+  type        = string
+  default     = "Disable"
+}
+
+variable "primary_endpoint_net_type" {
+  description = "The network type of the endpoint address. Valid values: Public, Private, Inner."
+  type        = string
+  default     = "Public"
+}
+
+variable "primary_endpoint_ssl_auto_rotate" {
+  description = "Specifies whether automatic rotation of SSL certificates is enabled. Valid values: `Enable`,`Disable`."
+  type        = string
+  default     = "Disable"
+}
+
+variable "primary_endpoint_description" {
+  description = "The name of the endpoint."
+  type        = string
+  default     = null
+}
+
+variable "primary_endpoint_connection_prefix" {
+  description = "The Prefix of the specified endpoint."
+  type        = string
+  default     = null
+}
+
+variable "primary_endpoint_port" {
+  description = "Port of the specified primary endpoint. Valid values: 3000 to 5999."
   type        = string
   default     = null
 }

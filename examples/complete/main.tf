@@ -78,17 +78,20 @@ module "default" {
   kms_encryption_context = var.kms_encryption_context
   account_type           = "Normal"
   #alicloud_polardb_endpoint
-  create_endpoint    = true
-  endpoint_type      = var.endpoint_type
-  read_write_mode    = var.read_write_mode
-  nodes              = var.nodes
-  auto_add_new_nodes = var.auto_add_new_nodes
-  endpoint_config    = var.endpoint_config
-  ssl_enabled        = var.ssl_enabled
-  net_type           = var.net_type
-  ssl_auto_rotate    = var.ssl_auto_rotate
+  create_endpoint         = true
+  endpoint_type           = var.endpoint_type
+  read_write_mode         = var.read_write_mode
+  nodes                   = var.nodes
+  auto_add_new_nodes      = var.auto_add_new_nodes
+  endpoint_config         = var.endpoint_config
+  ssl_enabled             = var.ssl_enabled
+  net_type                = var.net_type
+  ssl_auto_rotate         = var.ssl_auto_rotate
+  db_endpoint_description = var.db_endpoint_description
+  endpoint_port           = var.endpoint_port
   #alicloud_polardb_endpoint_address
   create_endpoint_address = true
+  endpoint_address_port   = var.endpoint_address_port
   connection_prefix       = "${var.connection_prefix}-${random_integer.default.result}"
   #alicloud_polardb_account_privilege
   create_account_privilege = true

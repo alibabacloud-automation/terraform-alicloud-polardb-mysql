@@ -60,7 +60,7 @@ variable "collector_status" {
 }
 
 variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. "
+  description = "Set of parameters needs to be set after DB cluster was launched. name: The name of a parameter. value: The value of a parameter."
   type        = list(map(string))
   default     = []
 }
@@ -216,12 +216,29 @@ variable "ssl_auto_rotate" {
   type        = string
   default     = "Disable"
 }
+variable "db_endpoint_description" {
+  description = "The name of the custom cluster endpoint."
+  type        = string
+  default     = ""
+}
+
+variable "endpoint_port" {
+  description = "Port of the specified private endpoint. Valid values: 3000 to 5999."
+  type        = string
+  default     = null
+}
 
 #alicloud_polardb_endpoint_address
 variable "connection_prefix" {
   description = "The Prefix of the specified endpoint."
   type        = string
   default     = "testpolardbconn"
+}
+
+variable "endpoint_address_port" {
+  description = "Port of the specified public endpoint. Valid values: 3000 to 5999."
+  type        = string
+  default     = null
 }
 
 #alicloud_polardb_account_privilege

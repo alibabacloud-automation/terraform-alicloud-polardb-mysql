@@ -57,10 +57,13 @@ module "example" {
   read_write_mode    = "ReadOnly"
   auto_add_new_nodes = "Enable"
   net_type           = "Private"
+  db_endpoint_description       = "test01"
+  endpoint_port                 = "3308"
   #alicloud_polardb_endpoint_address
   create_endpoint_address = true
   connection_prefix       = "testpolardbconn"
   account_privilege       = "ReadOnly"
+  endpoint_address_port   = "3306"
   #alicloud_polardb_account_privilege
   create_account_privilege = true
   #alicloud_polardb_backup_policy
@@ -80,6 +83,27 @@ module "example" {
   data_level2_backup_another_region_retention_period = "30"
   log_backup_another_region_region                   = "cn-hangzhou"
   log_backup_another_region_retention_period         = "30"
+  #alicloud_polardb_global_database_network
+  create_global_database_network      = true
+  global_database_network_description = "test01"
+  #alicloud_polardb_parameter_group
+  create_parameter_group      = true
+  parameter_group_name        = "test_group"
+  db_type                     = "MySQL"
+  parameter_group_db_version  = "8.0"
+  parameter_group_parameters  = {
+    name = "wait_timeout"
+    value = "86"
+  }
+  parameter_group_description = "test01"
+  #alicloud_polardb_primary_endpoint
+  create_primary_endpoint            = true
+  primary_endpoint_ssl_enabled       = "Disable"
+  primary_endpoint_net_type          = "Public"
+  primary_endpoint_ssl_auto_rotate   = "Disable"
+  primary_endpoint_description       = "test01"
+  primary_endpoint_connection_prefix = "testpolardbconn110"
+  primary_endpoint_port              = "3307"
 }
 ```
 
@@ -93,7 +117,8 @@ module "example" {
 * [创建标准版实例 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/se-normal-polardb)
 * [创建敏态serverless实例 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/serverless-polardb)
 * [创建稳态serverless实例 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/steady-serverless-polardb)
-
+* [创建全球数据网络及创建参数模板 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/global-database-network-and-parameter-group)
+* [修改主集群地址 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/primary-endpoint)
 ## 注意事项
 
 * 本 Module 使用的 AccessKey 和 SecretKey 可以直接从 `profile` 和 `shared_credentials_file`

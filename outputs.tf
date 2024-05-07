@@ -123,3 +123,38 @@ output "backup_policy_enable_backup_log" {
   description = "Indicates whether the log backup feature was enabled. Valid values are `0`, `1`. `1` By default, the log backup feature is enabled and cannot be disabled."
   value       = concat(alicloud_polardb_backup_policy.backup_policy.*.enable_backup_log, [""])[0]
 }
+
+output "db_endpoint_id" {
+  description = "The ID of the endpoint."
+  value       = concat(alicloud_polardb_endpoint.endpoint.*.db_endpoint_id, [""])[0]
+}
+
+output "gdn_id" {
+  description = "TThe ID of the GDN."
+  value       = concat(alicloud_polardb_global_database_network.global_database_network.*.id, [""])[0]
+}
+
+output "status" {
+  description = "The status of the Global Database Network."
+  value       = concat(alicloud_polardb_global_database_network.global_database_network.*.status, [""])[0]
+}
+
+output "primary_endpoint_type" {
+  description = "Type of endpoint."
+  value       = concat(alicloud_polardb_primary_endpoint.primary_endpoint.*.endpoint_type, [""])[0]
+}
+
+output "primary_endpoint_ssl_connection_string" {
+  description = "The name of the endpoint."
+  value       = concat(alicloud_polardb_primary_endpoint.primary_endpoint.*.ssl_connection_string, [""])[0]
+}
+
+output "primary_endpoint_ssl_expire_time" {
+  description = "The time when the SSL certificate expires. The time follows the ISO 8601 standard in the yyyy-MM-ddTHH:mm:ssZ format. The time is displayed in UTC."
+  value       = concat(alicloud_polardb_primary_endpoint.primary_endpoint.*.ssl_expire_time, [""])[0]
+}
+
+output "primary_endpoint_id" {
+  description = "The ID of the cluster endpoint."
+  value       = concat(alicloud_polardb_primary_endpoint.primary_endpoint.*.db_endpoint_id, [""])[0]
+}

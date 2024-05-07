@@ -78,16 +78,18 @@ resource "alicloud_polardb_account" "account" {
 }
 
 resource "alicloud_polardb_endpoint" "endpoint" {
-  count              = var.create_endpoint ? 1 : 0
-  db_cluster_id      = local.this_db_cluster_id
-  endpoint_type      = var.endpoint_type
-  read_write_mode    = var.read_write_mode
-  nodes              = var.nodes
-  auto_add_new_nodes = var.auto_add_new_nodes
-  endpoint_config    = var.endpoint_config
-  ssl_enabled        = var.ssl_enabled
-  net_type           = var.net_type
-  ssl_auto_rotate    = var.ssl_auto_rotate
+  count                   = var.create_endpoint ? 1 : 0
+  db_cluster_id           = local.this_db_cluster_id
+  endpoint_type           = var.endpoint_type
+  read_write_mode         = var.read_write_mode
+  nodes                   = var.nodes
+  auto_add_new_nodes      = var.auto_add_new_nodes
+  endpoint_config         = var.endpoint_config
+  ssl_enabled             = var.ssl_enabled
+  net_type                = var.net_type
+  ssl_auto_rotate         = var.ssl_auto_rotate
+  db_endpoint_description = var.db_endpoint_description
+  port                    = var.endpoint_port
 }
 
 resource "alicloud_polardb_endpoint_address" "endpoint_address" {
@@ -96,6 +98,7 @@ resource "alicloud_polardb_endpoint_address" "endpoint_address" {
   db_endpoint_id    = concat(alicloud_polardb_endpoint.endpoint.*.db_endpoint_id, [""])[0]
   connection_prefix = var.connection_prefix
   net_type          = "Public"
+  port              = var.endpoint_address_port
 }
 
 resource "alicloud_polardb_account_privilege" "account_privilege" {
@@ -125,3 +128,37 @@ resource "alicloud_polardb_backup_policy" "backup_policy" {
   log_backup_another_region_region                   = var.log_backup_another_region_region
   log_backup_another_region_retention_period         = var.log_backup_another_region_retention_period
 }
+
+resource "alicloud_polardb_global_database_network" "global_database_network" {
+  count         = var.create_global_database_network ? 1 : 0
+  db_cluster_id = local.this_db_cluster_id
+  description   = var.global_database_network_description
+}
+
+resource "alicloud_polardb_parameter_group" "parameter_group" {
+  count      = var.create_global_database_network ? 1 : 0
+  name       = var.parameter_group_name
+  db_type    = "MySQL"
+  db_version = var.parameter_group_db_version
+
+  dynamic "parameters" {
+    for_each = var.parameter_group_parameters
+    content {
+      param_name  = lookup(parameters.value, "param_name", null)
+      param_value = lookup(parameters.value, "param_value", null)
+    }
+  }
+  description = var.parameter_group_description
+}
+
+resource "alicloud_polardb_primary_endpoint" "primary_endpoint" {
+  count                   = var.create_primary_endpoint ? 1 : 0
+  db_cluster_id           = local.this_db_cluster_id
+  ssl_enabled             = var.primary_endpoint_ssl_enabled
+  net_type                = var.primary_endpoint_net_type
+  ssl_auto_rotate         = var.primary_endpoint_ssl_auto_rotate
+  db_endpoint_description = var.primary_endpoint_description
+  connection_prefix       = var.primary_endpoint_connection_prefix
+  port                    = var.primary_endpoint_port
+}
+
