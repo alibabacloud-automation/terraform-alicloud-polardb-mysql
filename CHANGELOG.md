@@ -1,4 +1,11 @@
-## 3.1.0 (Unreleased)
+## 3.2.0 (Unreleased)
+## 3.1.0 (2024-05-13)
+
+ENHANCEMENTS:
+
+- module/alicloud_polardb_endpoint: support attributes db_endpoint_description,endpoint_port;module/alicloud_polardb_endpoint_address: support port;module/alicloud_polardb_global_database_network : support new resource;module/alicloud_polardb_parameter_group : support new resource;module/alicloud_polardb_primary_endpoint : support new resource. [GH-12](https://github.com/alibabacloud-automation/terraform-alicloud-polardb-mysql/pull/12)
+
+
 ## 3.0.0 (2024-04-30)
 
 ENHANCEMENTS:
