@@ -25,6 +25,17 @@ creation_category                                   = "Normal"
 hot_standby_cluster                                 = "ON"
 creation_option                                     = "Normal"
 cluster_backup_retention_policy_on_cluster_deletion = "LATEST"
+db_node_id                                          = "1"
+hot_replica_mode                                    = "ON"
+default_time_zone                                   = "-4:00"
+lower_case_table_names                              = 1
+db_node_num                                         = 2
+loose_polar_log_bin                                 = "ON"
+# target_db_revision_version_code = "20240314"
+# planned_end_time                = "2024-04-12T13:50:00Z"
+# planned_start_time              = "2024-04-12T14:10:00Z"
+# from_time_service               = "false"
+upgrade_type = "ALL"
 
 #alicloud_polardb_account
 account_password       = "tf_test123456"

@@ -124,6 +124,56 @@ output "backup_policy_enable_backup_log" {
   value       = concat(alicloud_polardb_backup_policy.backup_policy.*.enable_backup_log, [""])[0]
 }
 
+output "cluster_endpoint_id" {
+  description = "The current instance connection resource ID. Composed of instance ID and connection string with format."
+  value       = concat(alicloud_polardb_cluster_endpoint.endpoint.*.id, [""])[0]
+}
+
+output "cluster_endpoint_ssl_connection_string" {
+  description = "The SSL connection string of the cluster endpoint."
+  value       = concat(alicloud_polardb_cluster_endpoint.endpoint.*.ssl_connection_string, [""])[0]
+}
+
+output "cluster_endpoint_type" {
+  description = "Type of endpoint."
+  value       = concat(alicloud_polardb_cluster_endpoint.endpoint.*.endpoint_type, [""])[0]
+}
+
+output "cluster_endpoint_db_endpoint_id" {
+  description = "The ID of the cluster endpoint."
+  value       = concat(alicloud_polardb_cluster_endpoint.endpoint.*.db_endpoint_id, [""])[0]
+}
+
+output "cluster_endpoint_ssl_certificate_url" {
+  description = "The specifies SSL certificate download link."
+  value       = concat(alicloud_polardb_cluster_endpoint.endpoint.*.ssl_certificate_url, [""])[0]
+}
+
+output "cluster_endpoint_ssl_expire_time" {
+  description = "The time when the SSL certificate expires. The time follows the ISO 8601 standard in the yyyy-MM-ddTHH:mm:ssZ format. The time is displayed in UTC."
+  value       = concat(alicloud_polardb_cluster_endpoint.endpoint.*.ssl_expire_time, [""])[0]
+}
+
+output "cluster_endpoint_address_id" {
+  description = "The id of the cluster endpoint address."
+  value       = concat(alicloud_polardb_endpoint_address.cluster_endpoint_address.*.id, [""])[0]
+}
+
+output "cluster_endpoint_address_port" {
+  description = "Connection cluster or endpoint port."
+  value       = concat(alicloud_polardb_endpoint_address.cluster_endpoint_address.*.port, [""])[0]
+}
+
+output "cluster_endpoint_address_connection_string" {
+  description = "Connection cluster or endpoint string."
+  value       = concat(alicloud_polardb_endpoint_address.cluster_endpoint_address.*.connection_string, [""])[0]
+}
+
+output "cluster_endpoint_address_ip_address" {
+  description = "The ip address of connection string."
+  value       = concat(alicloud_polardb_endpoint_address.cluster_endpoint_address.*.ip_address, [""])[0]
+}
+
 output "db_endpoint_id" {
   description = "The ID of the endpoint."
   value       = concat(alicloud_polardb_endpoint.endpoint.*.db_endpoint_id, [""])[0]
