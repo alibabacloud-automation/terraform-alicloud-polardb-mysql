@@ -43,6 +43,17 @@ module "example" {
   hot_standby_cluster                                 = "ON"
   creation_option                                     = "Normal"
   cluster_backup_retention_policy_on_cluster_deletion = "LATEST"
+  target_db_revision_version_code                     = "20240314"
+  db_node_id                                          = "1"
+  hot_replica_mode                                    = "ON"
+  default_time_zone                                   = "-4:00"
+  lower_case_table_names                              = 1
+  db_node_num                                         = 1
+  loose_polar_log_bin                                 = "ON"
+  planned_end_time                                    = "2024-04-12T13:50:00Z"
+  planned_start_time                                  = "2024-04-12T14:10:00Z"
+  from_time_service                                   = "false"
+  upgrade_type                                        = "ALL"
   #alicloud_polardb_database
   create_database = true
   db_name         = "tf-dbname"
@@ -52,13 +63,14 @@ module "example" {
   account_password = "tf_test123"
   account_type     = "Normal"
   #alicloud_polardb_endpoint
-  create_endpoint    = true
-  endpoint_type      = "Custom"
-  read_write_mode    = "ReadOnly"
-  auto_add_new_nodes = "Enable"
-  net_type           = "Private"
-  db_endpoint_description       = "test01"
-  endpoint_port                 = "3308"
+  create_endpoint            = true
+  endpoint_type              = "Custom"
+  read_write_mode            = "ReadOnly"
+  auto_add_new_nodes         = "Enable"
+  net_type                   = "Private"
+  endpoint_connection_prefix = "endpointprivateprefix"
+  db_endpoint_description    = "test01"
+  endpoint_port              = "3308"
   #alicloud_polardb_endpoint_address
   create_endpoint_address = true
   connection_prefix       = "testpolardbconn"
@@ -83,6 +95,22 @@ module "example" {
   data_level2_backup_another_region_retention_period = "30"
   log_backup_another_region_region                   = "cn-hangzhou"
   log_backup_another_region_retention_period         = "30"
+  #alicloud_polardb_cluster_endpoint
+  create_cluster_endpoint                    = true
+  cluster_endpoint_private_connection_prefix = "polardbmysqlprivateprefix"
+  cluster_endpoint_private_port              = "5432"
+  cluster_endpoint_description               = "test_cluster_endpoint"
+  cluster_endpoint_nodes                     = []
+  cluster_endpoint_read_write_mode           = "ReadWrite"
+  cluster_endpoint_auto_add_new_nodes        = "Enable"
+  cluster_endpoint_config                    = {}
+  cluster_endpoint_ssl_enabled               = "Disable"
+  cluster_endpoint_net_type                  = "Private"
+  cluster_endpoint_ssl_auto_rotate           = "Disable"
+  #alicloud_polardb_cluster_endpoint_address
+  create_cluster_endpoint_address           = true
+  cluster_endpoint_public_connection_prefix = "polardbmysqlpublicprefix"
+  cluster_endpoint_public_port              = "3999"
   #alicloud_polardb_global_database_network
   create_global_database_network      = true
   global_database_network_description = "test01"
@@ -117,6 +145,7 @@ module "example" {
 * [创建标准版实例 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/se-normal-polardb)
 * [创建敏态serverless实例 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/serverless-polardb)
 * [创建稳态serverless实例 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/steady-serverless-polardb)
+* [集群地址变更 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/cluster-endpoint)
 * [创建全球数据网络及创建参数模板 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/global-database-network-and-parameter-group)
 * [修改主集群地址 示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-polardb-mysql/tree/main/examples/primary-endpoint)
 ## 注意事项

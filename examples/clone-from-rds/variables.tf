@@ -56,7 +56,7 @@ variable "maintain_time" {
 variable "collector_status" {
   description = "Specifies whether to enable or disable SQL data collector. Valid values are Enable, Disabled."
   type        = string
-  default     = "Disabled"
+  default     = null
 }
 
 variable "parameters" {

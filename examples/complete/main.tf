@@ -63,6 +63,17 @@ module "default" {
   hot_standby_cluster                                 = var.hot_standby_cluster
   creation_option                                     = var.creation_option
   cluster_backup_retention_policy_on_cluster_deletion = var.cluster_backup_retention_policy_on_cluster_deletion
+  target_db_revision_version_code                     = var.target_db_revision_version_code
+  db_node_id                                          = var.db_node_id
+  hot_replica_mode                                    = var.hot_replica_mode
+  default_time_zone                                   = var.default_time_zone
+  lower_case_table_names                              = var.lower_case_table_names
+  db_node_num                                         = var.db_node_num
+  loose_polar_log_bin                                 = var.loose_polar_log_bin
+  planned_end_time                                    = var.planned_end_time
+  planned_start_time                                  = var.planned_start_time
+  from_time_service                                   = var.from_time_service
+  upgrade_type                                        = var.upgrade_type
 
   #alicloud_polardb_database
   db_name               = "tf-dbname"
@@ -78,17 +89,18 @@ module "default" {
   kms_encryption_context = var.kms_encryption_context
   account_type           = "Normal"
   #alicloud_polardb_endpoint
-  create_endpoint         = true
-  endpoint_type           = var.endpoint_type
-  read_write_mode         = var.read_write_mode
-  nodes                   = var.nodes
-  auto_add_new_nodes      = var.auto_add_new_nodes
-  endpoint_config         = var.endpoint_config
-  ssl_enabled             = var.ssl_enabled
-  net_type                = var.net_type
-  ssl_auto_rotate         = var.ssl_auto_rotate
-  db_endpoint_description = var.db_endpoint_description
-  endpoint_port           = var.endpoint_port
+  create_endpoint            = true
+  endpoint_type              = var.endpoint_type
+  read_write_mode            = var.read_write_mode
+  nodes                      = var.nodes
+  auto_add_new_nodes         = var.auto_add_new_nodes
+  endpoint_config            = var.endpoint_config
+  ssl_enabled                = var.ssl_enabled
+  net_type                   = var.net_type
+  ssl_auto_rotate            = var.ssl_auto_rotate
+  endpoint_connection_prefix = "${var.endpoint_connection_prefix}-${random_integer.default.result}"
+  db_endpoint_description    = var.db_endpoint_description
+  endpoint_port              = var.endpoint_port
   #alicloud_polardb_endpoint_address
   create_endpoint_address = true
   endpoint_address_port   = var.endpoint_address_port
