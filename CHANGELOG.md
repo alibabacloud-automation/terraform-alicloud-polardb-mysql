@@ -1,4 +1,8 @@
-## 3.2.0 (Unreleased)
+## 3.3.0 (Unreleased)
+## 3.2.0 (2024-05-21)
+
+- module/alicloud_polardb_cluster: support attributes db_node_id,hot_replica_mode,default_time_zone,lower_case_table_names,db_node_num,loose_polar_log_bin,target_db_revision_version_code,planned_end_time,planned_start_time,from_time_service,upgrade_type; module/alicloud_polardb_cluster_endpoint: support new resource.[GH-11](https://github.com/alibabacloud-automation/terraform-alicloud-polardb-mysql/pull/11)
+
 ## 3.1.0 (2024-05-13)
 
 ENHANCEMENTS:
