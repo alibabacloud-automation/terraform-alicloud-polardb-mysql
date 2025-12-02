@@ -1,3 +1,5 @@
+## [3.2.1](https://github.com/alibabacloud-automation/terraform-alicloud-polardb-mysql/compare/v3.2.0...v3.2.1) (2025-12-02)
+
 ## 3.3.0 (Unreleased)
 ## 3.2.0 (2024-05-21)
 
