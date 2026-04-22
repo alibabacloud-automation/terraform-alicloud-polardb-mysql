@@ -1,3 +1,14 @@
+## [4.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-polardb-mysql/compare/v3.2.1...v4.0.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add provider version constraint for aliyun/alicloud
+
+### Features
+
+* add provider version constraint for aliyun/alicloud ([bc16a2c](https://github.com/alibabacloud-automation/terraform-alicloud-polardb-mysql/commit/bc16a2c5ea69ad8443dc6be6f155fa798d6be8b9))
+
 ## [3.2.1](https://github.com/alibabacloud-automation/terraform-alicloud-polardb-mysql/compare/v3.2.0...v3.2.1) (2025-12-02)
 
 ## 3.3.0 (Unreleased)
