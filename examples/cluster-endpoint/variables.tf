@@ -59,31 +59,6 @@ variable "collector_status" {
   default     = null
 }
 
-variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. "
-  type        = list(map(string))
-  default     = []
-}
-
-#alicloud_polardb_cluster_endpoint
-variable "create_cluster_endpoint" {
-  description = "Controls if cluster endpoint should be created."
-  type        = bool
-  default     = false
-}
-
-variable "cluster_endpoint_private_connection_prefix" {
-  description = "The private network address prefix of the cluster endpoint."
-  type        = string
-  default     = null
-}
-
-variable "cluster_endpoint_private_port" {
-  description = "Private port of the cluster endpoint. Valid values: 3000 to 5999."
-  type        = string
-  default     = null
-}
-
 variable "cluster_endpoint_description" {
   description = "The name of the cluster endpoint."
   type        = string
@@ -114,12 +89,6 @@ variable "cluster_endpoint_config" {
   default     = {}
 }
 
-variable "cluster_endpoint_ssl_enabled" {
-  description = "Specifies how to modify the SSL encryption status. Default value: `Disable`. Valid values: Disable, Enable, Update."
-  type        = string
-  default     = "Disable"
-}
-
 variable "cluster_endpoint_net_type" {
   description = "The network type of the cluster endpoint address. Default value: `Private`. Valid values: Public, Private, Inner."
   type        = string
@@ -132,21 +101,3 @@ variable "cluster_endpoint_ssl_auto_rotate" {
   default     = "Disable"
 }
 
-#alicloud_polardb_cluster_endpoint_address
-variable "create_cluster_endpoint_address" {
-  description = "Controls if cluster endpoint address should be created."
-  type        = bool
-  default     = false
-}
-
-variable "cluster_endpoint_public_connection_prefix" {
-  description = "The public network address prefix of the cluster endpoint."
-  type        = string
-  default     = null
-}
-
-variable "cluster_endpoint_public_port" {
-  description = "Public port of the cluster endpoint. Valid values: 3000 to 5999."
-  type        = string
-  default     = null
-}

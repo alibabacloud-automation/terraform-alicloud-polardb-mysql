@@ -59,12 +59,6 @@ variable "collector_status" {
   default     = null
 }
 
-variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. name: The name of a parameter. value: The value of a parameter."
-  type        = list(map(string))
-  default     = []
-}
-
 variable "tde_status" {
   description = "The turn on TDE encryption. Valid values are Enabled, Disabled. "
   type        = string
@@ -312,13 +306,6 @@ variable "endpoint_address_port" {
   description = "Port of the specified public endpoint. Valid values: 3000 to 5999."
   type        = string
   default     = null
-}
-
-#alicloud_polardb_account_privilege
-variable "account_privilege" {
-  description = "The privilege of one account access database. Valid values: ReadOnly, ReadWrite, DMLOnly, DDLOnly. Default to ReadOnly."
-  type        = string
-  default     = "ReadOnly"
 }
 
 #alicloud_polardb_backup_policy

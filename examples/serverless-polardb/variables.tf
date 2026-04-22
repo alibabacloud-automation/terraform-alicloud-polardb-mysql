@@ -59,12 +59,6 @@ variable "collector_status" {
   default     = null
 }
 
-variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. "
-  type        = list(map(string))
-  default     = []
-}
-
 variable "tde_status" {
   description = "The turn on TDE encryption. Valid values are Enabled, Disabled. "
   type        = string
@@ -86,18 +80,6 @@ variable "security_group_ids" {
 variable "deletion_lock" {
   description = "Valid values are 0, 1. 1 means to open the cluster protection lock, 0 means to close the cluster protection lock. Cannot modify after created when pay_type is Prepaid."
   type        = number
-  default     = null
-}
-
-variable "encryption_key" {
-  description = "The ID of the custom key. `encryption_key` cannot be modified after TDE is opened."
-  type        = string
-  default     = null
-}
-
-variable "role_arn" {
-  description = "The Alibaba Cloud Resource Name (ARN) of the RAM role. A RAM role is a virtual identity that you can create within your Alibaba Cloud account."
-  type        = string
   default     = null
 }
 

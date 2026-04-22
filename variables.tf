@@ -734,23 +734,10 @@ variable "global_database_network_description" {
   default     = null
 }
 
-#alicloud_polardb_parameter_group
-variable "create_parameter_group" {
-  description = "Controls if parameter_group should be created"
-  type        = bool
-  default     = false
-}
-
 variable "parameter_group_name" {
   description = "The name of the parameter template. It must be 8 to 64 characters in length, and can contain letters, digits, and underscores (_). It must start with a letter and cannot contain Chinese characters."
   type        = string
   default     = "parameter_name"
-}
-
-variable "db_type" {
-  description = "The type of the database engine. Only `MySQL` is supported."
-  type        = string
-  default     = "MySQL"
 }
 
 variable "parameter_group_db_version" {

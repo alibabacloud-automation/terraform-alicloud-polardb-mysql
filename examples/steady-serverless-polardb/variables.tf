@@ -59,12 +59,6 @@ variable "collector_status" {
   default     = null
 }
 
-variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. "
-  type        = list(map(string))
-  default     = []
-}
-
 variable "tde_status" {
   description = "The turn on TDE encryption. Valid values are Enabled, Disabled. "
   type        = string
@@ -86,18 +80,6 @@ variable "security_group_ids" {
 variable "deletion_lock" {
   description = "Valid values are 0, 1. 1 means to open the cluster protection lock, 0 means to close the cluster protection lock. Cannot modify after created when pay_type is Prepaid."
   type        = number
-  default     = null
-}
-
-variable "encryption_key" {
-  description = "The ID of the custom key. `encryption_key` cannot be modified after TDE is opened."
-  type        = string
-  default     = null
-}
-
-variable "role_arn" {
-  description = "The Alibaba Cloud Resource Name (ARN) of the RAM role. A RAM role is a virtual identity that you can create within your Alibaba Cloud account."
-  type        = string
   default     = null
 }
 
@@ -135,48 +117,6 @@ variable "creation_option" {
   description = "The method that is used to create a cluster. Valid values are `Normal`,`CloneFromPolarDB`,`CloneFromRDS`,`MigrationFromRDS`,`CreateGdnStandby`. The default value is Normal. If DBType is set to MySQL and DBVersion is set to 5.6 or 5.7, this parameter can be set to CloneFromRDS or MigrationFromRDS. If DBType is set to MySQL and DBVersion is set to 8.0, this parameter can be set to CreateGdnStandby."
   type        = string
   default     = "Normal"
-}
-
-variable "serverless_type" {
-  description = "The type of the serverless cluster. Valid values `AgileServerless`, `SteadyServerless`. This parameter is valid only for serverless clusters."
-  type        = string
-  default     = null
-}
-
-variable "serverless_steady_switch" {
-  description = "Serverless steady-state switch. Valid values are `ON`, `OFF`. This parameter is valid only for serverless clusters.When serverless_steady_switch is `ON` and serverless_type is `SteadyServerless`, parameters `scale_min`, `scale_max`, `scale_ro_num_min` and `scale_ro_num_max` are all required."
-  type        = string
-  default     = null
-}
-
-variable "scale_min" {
-  description = "The minimum number of PCUs per node for scaling. Valid values: 1 PCU to 31 PCUs. It is valid when serverless_type is `AgileServerless`. Valid values: 1 PCU to 8 PCUs.It is valid when serverless_type is `SteadyServerless`.· This parameter is valid only for serverless clusters."
-  type        = number
-  default     = null
-}
-
-variable "scale_max" {
-  description = "The maximum number of PCUs per node for scaling. Valid values: 1 PCU to 32 PCUs. It is valid when serverless_type is `AgileServerless`. Valid values: 1 PCU to 8 PCUs.It is valid when serverless_type is `SteadyServerless`. This parameter is valid only for serverless clusters."
-  type        = number
-  default     = null
-}
-
-variable "scale_ro_num_min" {
-  description = "The minimum number of read-only nodes for scaling. Valid values: 0 to 15 . It is valid when serverless_type is `AgileServerless`. Valid values: 0 to 7 .It is valid when serverless_type is `SteadyServerless`. This parameter is valid only for serverless clusters."
-  type        = number
-  default     = null
-}
-
-variable "scale_ro_num_max" {
-  description = "The maximum number of read-only nodes for scaling. Valid values: 0 to 15. It is valid when serverless_type is `AgileServerless`. Valid values: 0 to 7. It is valid when serverless_type is `SteadyServerless`. This parameter is valid only for serverless clusters."
-  type        = number
-  default     = null
-}
-
-variable "allow_shut_down" {
-  description = "Specifies whether to enable the no-activity suspension feature. Default value: false. Valid values are `true`, `false`. This parameter is valid only for serverless clusters."
-  type        = string
-  default     = null
 }
 
 variable "seconds_until_auto_pause" {

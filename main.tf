@@ -107,7 +107,7 @@ resource "alicloud_polardb_endpoint" "endpoint" {
 resource "alicloud_polardb_endpoint_address" "endpoint_address" {
   count             = var.create_endpoint_address ? 1 : 0
   db_cluster_id     = local.this_db_cluster_id
-  db_endpoint_id    = concat(alicloud_polardb_endpoint.endpoint.*.db_endpoint_id, [""])[0]
+  db_endpoint_id    = concat(alicloud_polardb_endpoint.endpoint[*].db_endpoint_id, [""])[0]
   connection_prefix = var.connection_prefix
   net_type          = "Public"
   port              = var.endpoint_address_port
@@ -131,7 +131,7 @@ resource "alicloud_polardb_cluster_endpoint" "endpoint" {
 resource "alicloud_polardb_endpoint_address" "cluster_endpoint_address" {
   count             = var.create_cluster_endpoint_address ? 1 : 0
   db_cluster_id     = local.this_db_cluster_id
-  db_endpoint_id    = concat(alicloud_polardb_cluster_endpoint.endpoint.*.db_endpoint_id, [""])[0]
+  db_endpoint_id    = concat(alicloud_polardb_cluster_endpoint.endpoint[*].db_endpoint_id, [""])[0]
   net_type          = "Public"
   connection_prefix = var.cluster_endpoint_public_connection_prefix
   port              = var.cluster_endpoint_public_port
@@ -140,8 +140,8 @@ resource "alicloud_polardb_endpoint_address" "cluster_endpoint_address" {
 resource "alicloud_polardb_account_privilege" "account_privilege" {
   count             = var.create_account_privilege ? 1 : 0
   db_cluster_id     = local.this_db_cluster_id
-  account_name      = concat(alicloud_polardb_account.account.*.account_name, [""])[0]
-  db_names          = [concat(alicloud_polardb_database.database.*.db_name, [""])[0]]
+  account_name      = concat(alicloud_polardb_account.account[*].account_name, [""])[0]
+  db_names          = [concat(alicloud_polardb_database.database[*].db_name, [""])[0]]
   account_privilege = var.account_privilege
 }
 

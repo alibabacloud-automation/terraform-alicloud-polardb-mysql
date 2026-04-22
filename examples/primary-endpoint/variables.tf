@@ -59,12 +59,6 @@ variable "collector_status" {
   default     = null
 }
 
-variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. "
-  type        = list(map(string))
-  default     = []
-}
-
 variable "tde_status" {
   description = "The turn on TDE encryption. Valid values are Enabled, Disabled. "
   type        = string

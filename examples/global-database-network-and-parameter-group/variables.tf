@@ -59,12 +59,6 @@ variable "collector_status" {
   default     = null
 }
 
-variable "parameters" {
-  description = "Set of parameters needs to be set after DB cluster was launched. "
-  type        = list(map(string))
-  default     = []
-}
-
 variable "tde_status" {
   description = "The turn on TDE encryption. Valid values are Enabled, Disabled. "
   type        = string
@@ -97,22 +91,10 @@ variable "parameter_group_name" {
   default     = "parameter_name"
 }
 
-variable "db_type" {
-  description = "The type of the database engine. Only `MySQL` is supported."
-  type        = string
-  default     = "MySQL"
-}
-
 variable "parameter_group_db_version" {
   description = "he version number of the database engine. Valid values: `5.6`, `5.7`, `8.0`."
   type        = string
   default     = "8.0"
-}
-
-variable "parameter_group_parameters" {
-  description = "The parameter template. param_name: The name of a parameter in the parameter template. param_value: The value of a parameter in the parameter template."
-  type        = list(map(string))
-  default     = []
 }
 
 variable "parameter_group_description" {
